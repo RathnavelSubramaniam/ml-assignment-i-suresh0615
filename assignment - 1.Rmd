@@ -1,0 +1,205 @@
+---
+output:
+  
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+        
+  pdf_document:
+    
+    fig_caption: true
+    fig_crop: false
+  word_document: default
+params:
+    printcode: false
+---
+
+
+---
+title: "assignment_1"
+author: "Sureshkumar"
+date: "2024-07-10"
+output: html_document
+---
+
+
+
+
+```{r}
+library(ISLR)
+```
+```{r}
+?Auto
+```
+
+
+
+```{r}
+data(Auto)
+```
+
+
+```{r}
+summary(complete.cases(Auto))
+```
+```{r}
+auto=Auto 
+```
+### A)Which of the predictors are quantitative, and which are qualitative?
+```{r}
+str(auto)
+```
+
+ * Qualitative Predictors-Origin,name
+ * Quantitative predictors-mpg,cylinders,displacement,horsepower,weight,acceleration,year
+
+
+### B)What is the range of each quantitative predictor? You can answer this using the range() function.
+```{r}
+print("mpg")
+range(auto$mpg)
+
+print("cyclinders")
+range(auto$cylinders)
+
+print("displacment")
+range(auto$displacement)
+
+print("horsepower")
+range(auto$horsepower)
+
+print("weight")
+range(auto$weight)
+
+print("acceleration")
+range(auto$acceleration)
+
+print("year")
+range(auto$year)
+
+```
+
+### C)What is the mean and standard deviation of each quantitative predictor? 
+
+
+```{r}
+print("Mean and Standard deviation for mpg")
+mean(auto$mpg)
+sd(auto$mpg)
+
+print("Mean and Standard deviation for cylinders")
+mean(auto$cylinders)
+sd(auto$cylinders)
+
+print("Mean and Standard deviation for displacement")
+mean(auto$displacement)
+sd(auto$displacement)
+
+print("Mean and Standard deviation for horsepower")
+mean(auto$horsepower)
+sd(auto$horsepower)
+
+print("Mean and Standard deviation for weight")
+mean(auto$weight)
+sd(auto$weight)
+
+print("Mean and Standard deviation for acceleration")
+mean(auto$acceleration)
+sd(auto$acceleration)
+```
+
+### D)Now remove the 10th through 85th observations. What is the range, mean, and standard deviation of each predictor in the subset of the data that remains? 
+
+
+```{r}
+removed_auto<-auto[-10:-84,]
+removed_auto
+```
+
+```{r}
+print("range,Mean and Standard deviation for mpg")
+range(removed_auto$mpg)
+mean(removed_auto$mpg)
+sd(removed_auto$mpg)
+
+print("range,Mean and Standard deviation for cylinders")
+range(removed_auto$cylinders)
+mean(removed_auto$cylinders)
+sd(removed_auto$cylinders)
+
+print("range,Mean and Standard deviation for displacement")
+range(removed_auto$displacement)
+mean(removed_auto$displacement)
+sd(removed_auto$displacement)
+
+print("range,Mean and Standard deviation for horsepower")
+range(removed_auto$horsepower)
+mean(removed_auto$horsepower)
+sd(removed_auto$horsepower)
+
+print("range,Mean and Standard deviation for weight")
+range(removed_auto$weight)
+mean(removed_auto$weight)
+sd(removed_auto$weight)
+
+print("range,Mean and Standard deviation for acceleration")
+range(removed_auto$acceleration)
+mean(removed_auto$acceleration)
+sd(removed_auto$acceleration)
+```
+
+### E)Using the full data set, investigate the predictors graphically, using scatterplots or other tools of your choice. Create some plots highlighting the relationships among the predictors. Comment on your findings.
+
+```{r}
+pairs(Auto)
+```
+
+```{r}
+par(mfrow=c(2,2))
+plot(auto$mpg,auto$displacement)
+plot(auto$mpg,auto$horsepower)
+plot(auto$mpg,auto$weight)
+plot(auto$mpg,auto$acceleration)
+```
+ * mpg vs displacement vs horsepower vs weight - strong negative relationship.
+ * mpg vs acceleration - weak positive relationship
+ 
+ 
+```{r}
+par(mfrow=c(2,2))
+plot(auto$displacement,auto$horsepower)
+plot(auto$displacement,auto$weight)
+plot(auto$displacement,auto$acceleration)
+```
+ 
+  * displacement vs horsepower vs weight -strong positive relationship
+ *  displacement vs acceleration - strong negative relationship
+ 
+ 
+```{r}
+par(mfrow=c(1,2))
+plot(auto$horsepower,auto$weight)
+plot(auto$horsepower,auto$acceleration)
+```
+ 
+ * horsepower vs weight - strong positvie relationship
+ * horsepower vs acceleration - strong negative relationship
+ 
+ 
+ ### F)Suppose that we wish to predict gas mileage (mpg) on the basis of the other variables. Do your plots suggest that any of the other variables might be useful in predicting mpg? Justify your answer
+ 
+```{r}
+par(mfrow=c(2,2))
+plot(auto$mpg,auto$displacement)
+plot(auto$mpg,auto$horsepower)
+plot(auto$mpg,auto$weight)
+plot(auto$mpg,auto$acceleration)
+```
+ * mpg has strong negative relationship with displacement,horsepower and weight.
+ * mpg moves in opposite direction of displacement,horsepower and weight. we can use these three predictor to predict mpg,if these three predictor is increasing mpg will be opposite of this predictors.
+ 
+ * Also mpg has weak positve relationship with acceleration which is not useful for predicting
+ 
+ 
